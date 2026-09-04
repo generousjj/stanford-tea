@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { PlaceholderLink } from "@/components/shared/PlaceholderLink";
 import { InstagramIcon } from "@/components/shared/BrandIcons";
 import { DonateButton } from "@/components/site/DonateButton";
+import { SupportModal } from "@/components/site/SupportModal";
 import {
   JOIN_FORM_URL,
   INSTAGRAM_URL,
@@ -27,12 +28,18 @@ const FOCUSABLE =
 
 export function PosterNav() {
   const [open, setOpen] = useState(false);
+  const [supportOpen, setSupportOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const skipMenuFocusRestore = useRef(false);
 
   const reduced = () =>
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const openSupport = useCallback(() => {
+    setSupportOpen(true);
+  }, []);
 
   const closeMenu = useCallback(() => {
     const el = overlayRef.current;
@@ -111,7 +118,8 @@ export function PosterNav() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
-      trigger?.focus();
+      if (!skipMenuFocusRestore.current) trigger?.focus();
+      skipMenuFocusRestore.current = false;
     };
   }, [open, closeMenu]);
 
@@ -141,7 +149,10 @@ export function PosterNav() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <DonateButton className="inline-flex min-h-11 items-center rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-5 py-2.5 font-work-sans text-sm font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C1515]">
+          <DonateButton
+            onOpen={openSupport}
+            className="inline-flex min-h-11 items-center rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-5 py-2.5 font-work-sans text-sm font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C1515]"
+          >
             Donate
           </DonateButton>
           <PlaceholderLink
@@ -218,7 +229,11 @@ export function PosterNav() {
                 Join TEA @ Stanford
               </PlaceholderLink>
               <DonateButton
-                onBeforeOpen={() => setOpen(false)}
+                onBeforeOpen={() => {
+                  skipMenuFocusRestore.current = true;
+                  setOpen(false);
+                }}
+                onOpen={openSupport}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
               >
                 Donate
@@ -236,6 +251,11 @@ export function PosterNav() {
           </nav>
         </div>
       )}
+
+      <SupportModal
+        open={supportOpen}
+        onClose={() => setSupportOpen(false)}
+      />
     </div>
   );
 }
