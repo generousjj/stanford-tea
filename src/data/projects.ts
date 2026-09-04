@@ -97,3 +97,32 @@ export const projects: Project[] = [
     placeholder: false,
   },
 ];
+
+/** Desktop showcase rows — open a row to reveal both projects side by side. */
+export type ProjectRow = {
+  id: string;
+  title: string;
+  blurb: string;
+  projects: Project[];
+};
+
+export const projectRows: ProjectRow[] = [
+  {
+    id: "attraction-design",
+    title: "Attraction Design",
+    blurb: "Competition concepts built end to end",
+    projects: [projects[0], projects[1]],
+  },
+  {
+    id: "interactive",
+    title: "Interactive Experiences",
+    blurb: "Characters, games, and guest moments",
+    projects: [projects[2], projects[3]],
+  },
+  {
+    id: "research",
+    title: "Research & In Progress",
+    blurb: "Haunt design and illusion prototyping",
+    projects: [projects[4], projects[5]],
+  },
+];

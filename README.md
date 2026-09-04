@@ -25,12 +25,12 @@ npm run lint
 | Projects | `src/data/projects.ts` |
 | Disciplines | `src/data/disciplines.ts` |
 | Org copy / pillars | `src/data/org.ts` |
-| Join / donate / contact links | `src/lib/links.ts` |
+| Join / contact / giving links | `src/lib/links.ts` |
 | Project images | `public/projects/` |
 
-Links still set to `#` in `src/lib/links.ts` show a “coming soon” bubble instead
-of navigating nowhere. Replace those placeholders with real URLs when ready
-(especially `DONATE_URL`, `JOIN_FORM_URL`, and `CONTACT_EMAIL`).
+The **Donate** button opens a support modal (Stanford giving + contact the TEA
+team). Other links still set to `#` in `src/lib/links.ts` show a “coming soon”
+bubble — replace placeholders like `JOIN_FORM_URL` and `CONTACT_EMAIL` when ready.
 
 ## Deploy
 

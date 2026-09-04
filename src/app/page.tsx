@@ -25,12 +25,12 @@ import {
   MAILING_LIST_URL,
   SPONSOR_INQUIRY_URL,
   EVENTS_REGISTRATION_URL,
-  DONATE_URL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
   PORTFOLIO_URL,
   CONTACT_EMAIL,
 } from "@/lib/links";
+import { DonateButton } from "@/components/site/DonateButton";
 import type { EventCategory } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -251,8 +251,9 @@ export default function HomePage() {
                 Project showcase
               </h2>
               <p className="mt-4 max-w-2xl text-lg font-medium text-[#1C1917]/80">
-                Tap a card to expand. Real member work spanning attraction-design
-                competitions, interactive experiences, and illusion R&amp;D.
+                Open a row to see both projects side by side. Real member work
+                spanning attraction-design competitions, interactive experiences,
+                and illusion R&amp;D.
               </p>
             </GsapReveal>
             <div className="mt-10">
@@ -501,14 +502,9 @@ export default function HomePage() {
                   </PlaceholderLink>
                 </li>
                 <li>
-                  <PlaceholderLink
-                    href={DONATE_URL}
-                    className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
-                    comingSoonMessage="Donate link coming soon"
-                    bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
-                  >
+                  <DonateButton className="inline-flex items-center gap-2 transition hover:text-[#F05A47]">
                     Donate
-                  </PlaceholderLink>
+                  </DonateButton>
                 </li>
               </ul>
             </div>
