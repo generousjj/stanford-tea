@@ -104,8 +104,7 @@ export function Modal({
         aria-describedby={describedById}
         tabIndex={-1}
         className={
-          "relative z-10 max-h-[90dvh] w-full overflow-y-auto outline-none " +
-          className
+          "relative z-10 max-h-[95dvh] w-full outline-none " + className
         }
       >
         {children}
