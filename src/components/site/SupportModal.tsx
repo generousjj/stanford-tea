@@ -69,7 +69,7 @@ export function SupportModal({ open, onClose }: SupportModalProps) {
           </p>
         </div>
 
-        <div className="mt-4 rounded-2xl border-2 border-[#1C1917] bg-[#F4C95D]/35 p-3.5 sm:p-4">
+        <div className="mt-4 mb-5 rounded-2xl border-2 border-[#1C1917] bg-[#F4C95D]/35 p-3.5 sm:mb-6 sm:p-4">
           <h3 className="font-archivo-black text-base uppercase leading-none text-[#1C1917]">
             Make a Gift
           </h3>
