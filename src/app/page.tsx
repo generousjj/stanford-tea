@@ -1,178 +1,528 @@
-import { ConceptCard } from "@/components/preview/ConceptCard";
+import type { Metadata } from "next";
+import { ArrowRight, CalendarDays, MapPin, Clock, Mail } from "lucide-react";
+import { InstagramIcon } from "@/components/shared/BrandIcons";
 import { SkipLink } from "@/components/shared/SkipLink";
-import { CONCEPTS, ORG } from "@/data/org";
+import { PlaceholderLink } from "@/components/shared/PlaceholderLink";
+import { PosterNav } from "@/components/site/PosterNav";
+import { PosterIntro } from "@/components/site/PosterIntro";
+import { PosterHero } from "@/components/site/PosterHero";
+import { GsapReveal } from "@/components/site/GsapReveal";
+import { EventMarquee } from "@/components/site/EventMarquee";
+import { DisciplineCarousel } from "@/components/site/DisciplineCarousel";
+import { PosterProjects } from "@/components/site/PosterProjects";
+import { PosterJoinForm } from "@/components/site/PosterJoinForm";
+import { MagneticButton } from "@/components/site/MagneticButton";
+import { Icon } from "@/lib/icons";
+import {
+  ORG,
+  PILLARS,
+  WHY_JOIN,
+  THEMED_ENTERTAINMENT_KINDS,
+} from "@/data/org";
+import { featuredEvent, upcomingEvents } from "@/data/events";
+import {
+  JOIN_FORM_URL,
+  MAILING_LIST_URL,
+  SPONSOR_INQUIRY_URL,
+  EVENTS_REGISTRATION_URL,
+  DONATE_URL,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
+  PORTFOLIO_URL,
+  CONTACT_EMAIL,
+} from "@/lib/links";
+import type { EventCategory } from "@/lib/types";
 
-const COMPARISON: {
-  attribute: string;
-  c1: string;
-  c2: string;
-  c3: string;
-}[] = [
-  {
-    attribute: "Vibe",
-    c1: "Editorial & credible",
-    c2: "Technical & spatial",
-    c3: "Energetic & graphic",
-  },
-  {
-    attribute: "Layout",
-    c1: "Asymmetric editorial grid",
-    c2: "Drafting sheet / diagram",
-    c3: "Layered poster stack",
-  },
-  {
-    attribute: "Typography",
-    c1: "DM Serif + Inter",
-    c2: "Space Grotesk + IBM Plex",
-    c3: "Archivo Black + Work Sans",
-  },
-  {
-    attribute: "Color",
-    c1: "Cardinal on warm white",
-    c2: "Blueprint navy + amber",
-    c3: "Coral, gold, plum & sky",
-  },
-  {
-    attribute: "Navigation",
-    c1: "Slim top bar, numbered",
-    c2: "Sheet index / coordinates",
-    c3: "Bold sticky pill menu",
-  },
-  {
-    attribute: "Discipline explorer",
-    c1: "Numbered case cards",
-    c2: "Connected systems network",
-    c3: "Rotating carousel",
-  },
-  {
-    attribute: "Motion",
-    c1: "Restrained fades & reveals",
-    c2: "Drawing-line animations",
-    c3: "Playful stack transitions",
-  },
-];
+export const metadata: Metadata = {
+  title: "TEA @ Stanford",
+  description:
+    "Stanford Themed Entertainment Association — exploring how immersive, memorable experiences are imagined, engineered, produced, and operated.",
+};
 
-export default function ComparisonPage() {
+const CATEGORY_STYLE: Record<EventCategory, { bg: string; text: string }> = {
+  Speaker: { bg: "#F05A47", text: "#FFF4DF" },
+  Workshop: { bg: "#F4C95D", text: "#1C1917" },
+  Trip: { bg: "#69C5D8", text: "#1C1917" },
+  Social: { bg: "#38233D", text: "#FFF4DF" },
+};
+
+export default function HomePage() {
   const year = new Date().getFullYear();
 
   return (
-    <div className="min-h-dvh bg-neutral-50 text-neutral-900">
-      <SkipLink />
+    <div id="top" className="min-h-dvh bg-[#FFF4DF] font-work-sans text-[#1C1917]">
+      {/* No-JS / fallback: guarantee animated content is always visible. */}
+      <noscript>
+        <style>{`[data-c3-reveal],.c3-hero-hidden{opacity:1!important;transform:none!important}`}</style>
+      </noscript>
 
-      <header className="border-b border-neutral-200 bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-4">
-          <div className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#8C1515] text-xs font-bold text-white">
-              T
-            </span>
-            {ORG.short}
-            <span className="ml-1 rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-500">
-              Design review
-            </span>
-          </div>
-        </div>
-      </header>
+      <SkipLink className="focus:bg-[#8C1515] focus:text-[#FFF4DF]" />
+      <PosterIntro />
+      <PosterNav />
 
       <main id="main">
-        <section className="mx-auto max-w-6xl px-6 pt-14 pb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#8C1515]">
-            Website concept comparison
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-            Three directions for the {ORG.formal}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-600">
-            {ORG.elevator} Below are three fully-built, single-page homepage
-            concepts. Open any of them, then use the preview bar to jump between
-            concepts and return here to compare.
-          </p>
-        </section>
+        <PosterHero />
 
-        <section
-          aria-labelledby="concepts-heading"
-          className="mx-auto max-w-6xl px-6 pb-14"
-        >
-          <h2 id="concepts-heading" className="sr-only">
-            The three concepts
-          </h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {CONCEPTS.map((c) => (
-              <ConceptCard key={c.id} concept={c} />
-            ))}
+        {/* Marquee band */}
+        <div className="border-y-4 border-[#1C1917] bg-[#69C5D8]">
+          <EventMarquee />
+        </div>
+
+        {/* ABOUT / WHAT IS THEMED ENTERTAINMENT */}
+        <section id="about" className="scroll-mt-24 bg-[#38233D] text-[#FFF4DF]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <p className="font-work-sans text-sm font-bold uppercase tracking-widest text-[#F4C95D]">
+                What is themed entertainment?
+              </p>
+              <h2 className="font-archivo-black mt-4 max-w-3xl text-4xl uppercase leading-none sm:text-6xl">
+                Way more than
+                <span className="text-[#F05A47]"> theme parks.</span>
+              </h2>
+            </GsapReveal>
+            <GsapReveal delay={0.05}>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#FFF4DF]/85">
+                Themed entertainment is the art and craft of designing physical
+                places and moments that tell a story. It shows up everywhere
+                people gather to feel something.
+              </p>
+            </GsapReveal>
+            <div className="mt-10 flex flex-wrap gap-3">
+              {THEMED_ENTERTAINMENT_KINDS.map((k, i) => {
+                const colors = ["#F05A47", "#F4C95D", "#69C5D8"];
+                const bg = colors[i % colors.length];
+                const dark = bg === "#F05A47";
+                return (
+                  <GsapReveal key={k} delay={i * 0.04}>
+                    <span
+                      className="inline-block rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide"
+                      style={{
+                        backgroundColor: bg,
+                        color: dark ? "#FFF4DF" : "#1C1917",
+                        transform: `rotate(${(i % 3) - 1}deg)`,
+                      }}
+                    >
+                      {k}
+                    </span>
+                  </GsapReveal>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        <section
-          aria-labelledby="compare-heading"
-          className="border-t border-neutral-200 bg-white"
-        >
-          <div className="mx-auto max-w-6xl px-6 py-14">
-            <h2
-              id="compare-heading"
-              className="text-2xl font-bold tracking-tight"
-            >
-              Intended style, side by side
-            </h2>
-            <p className="mt-2 max-w-2xl text-neutral-600">
-              Each concept is a distinct visual system — not a recolor of the
-              same layout. Here is how they differ at a glance.
-            </p>
-
-            <div className="mt-8 overflow-x-auto">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <caption className="sr-only">
-                  Comparison of the three website concepts across key design
-                  attributes
-                </caption>
-                <thead>
-                  <tr className="border-b border-neutral-300">
-                    <th scope="col" className="py-3 pr-4 font-semibold">
-                      Attribute
-                    </th>
-                    {CONCEPTS.map((c) => (
-                      <th
-                        key={c.id}
-                        scope="col"
-                        className="py-3 pr-4 font-semibold"
-                      >
-                        <span className="text-[#8C1515]">C{c.index}</span>{" "}
-                        {c.name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARISON.map((row) => (
-                    <tr
-                      key={row.attribute}
-                      className="border-b border-neutral-200 align-top"
+        {/* PROGRAM PILLARS */}
+        <section id="pillars" className="scroll-mt-24 border-b-4 border-[#1C1917]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                What we do
+              </h2>
+            </GsapReveal>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {PILLARS.map((p, i) => {
+                const colors = [
+                  { bg: "#F05A47", text: "#FFF4DF" },
+                  { bg: "#F4C95D", text: "#1C1917" },
+                  { bg: "#69C5D8", text: "#1C1917" },
+                  { bg: "#8C1515", text: "#FFF4DF" },
+                ];
+                const c = colors[i % colors.length];
+                return (
+                  <GsapReveal key={p.title} delay={i * 0.06}>
+                    <div
+                      className="flex h-full flex-col rounded-3xl border-4 border-[#1C1917] p-6 shadow-[5px_5px_0_0_#1C1917]"
+                      style={{ backgroundColor: c.bg, color: c.text }}
                     >
-                      <th
-                        scope="row"
-                        className="py-3 pr-4 font-medium text-neutral-500"
-                      >
-                        {row.attribute}
-                      </th>
-                      <td className="py-3 pr-4 text-neutral-800">{row.c1}</td>
-                      <td className="py-3 pr-4 text-neutral-800">{row.c2}</td>
-                      <td className="py-3 pr-4 text-neutral-800">{row.c3}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      <Icon name={p.icon} className="h-9 w-9" />
+                      <h3 className="font-archivo-black mt-4 text-xl uppercase leading-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-2 text-sm font-medium leading-relaxed opacity-90">
+                        {p.description}
+                      </p>
+                    </div>
+                  </GsapReveal>
+                );
+              })}
             </div>
+          </div>
+        </section>
+
+        {/* EVENTS */}
+        <section id="events" className="scroll-mt-24 border-b-4 border-[#1C1917] bg-[#69C5D8]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                Upcoming events
+              </h2>
+            </GsapReveal>
+
+            {/* Featured */}
+            <GsapReveal delay={0.05}>
+              <div className="mt-10 grid overflow-hidden rounded-3xl border-4 border-[#1C1917] bg-[#FFF4DF] shadow-[6px_6px_0_0_#1C1917] lg:grid-cols-[1.3fr_1fr]">
+                <div className="border-b-4 border-[#1C1917] p-7 lg:border-b-0 lg:border-r-4">
+                  <span className="inline-block -rotate-2 bg-[#8C1515] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#FFF4DF]">
+                    Featured · {featuredEvent.category}
+                  </span>
+                  <h3 className="font-archivo-black mt-4 text-3xl uppercase leading-none sm:text-4xl">
+                    {featuredEvent.title}
+                  </h3>
+                  <p className="mt-4 text-[15px] font-medium leading-relaxed text-[#1C1917]/80">
+                    {featuredEvent.description}
+                  </p>
+                  <MagneticButton
+                    href={EVENTS_REGISTRATION_URL}
+                    className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1C1917] px-6 py-3 text-sm font-bold text-[#FFF4DF] transition hover:bg-[#8C1515]"
+                    comingSoonMessage="Registration coming soon"
+                    bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+                  >
+                    Register interest
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </MagneticButton>
+                </div>
+                <div className="flex flex-col justify-center gap-4 bg-[#F4C95D] p-7">
+                  <div className="flex items-center gap-2 font-bold">
+                    <CalendarDays className="h-5 w-5" aria-hidden />
+                    {featuredEvent.date}
+                  </div>
+                  <div className="flex items-center gap-2 font-bold">
+                    <MapPin className="h-5 w-5" aria-hidden />
+                    {featuredEvent.location}
+                  </div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-[#1C1917]/60">
+                    Sample event — details TBA
+                  </p>
+                </div>
+              </div>
+            </GsapReveal>
+
+            {/* Upcoming cards */}
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {upcomingEvents.map((e, i) => {
+                const c = CATEGORY_STYLE[e.category];
+                return (
+                  <GsapReveal key={e.title} delay={i * 0.05} as="article">
+                    <div className="flex h-full flex-col rounded-3xl border-4 border-[#1C1917] bg-[#FFF4DF] p-6 shadow-[5px_5px_0_0_#1C1917]">
+                      <span
+                        className="w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide"
+                        style={{ backgroundColor: c.bg, color: c.text }}
+                      >
+                        {e.category}
+                      </span>
+                      <h3 className="font-archivo-black mt-4 text-2xl uppercase leading-none">
+                        {e.title}
+                      </h3>
+                      <dl className="mt-3 space-y-1.5 text-sm font-semibold text-[#1C1917]/80">
+                        <div className="flex items-center gap-2">
+                          <CalendarDays className="h-4 w-4" aria-hidden />
+                          <dt className="sr-only">Date</dt>
+                          <dd>{e.date}</dd>
+                        </div>
+                        {e.time && (
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4" aria-hidden />
+                            <dt className="sr-only">Time</dt>
+                            <dd>{e.time}</dd>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4" aria-hidden />
+                          <dt className="sr-only">Location</dt>
+                          <dd>{e.location}</dd>
+                        </div>
+                      </dl>
+                      <p className="mt-3 flex-1 text-sm font-medium leading-relaxed text-[#1C1917]/75">
+                        {e.description}
+                      </p>
+                    </div>
+                  </GsapReveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* PROJECTS */}
+        <section id="projects" className="scroll-mt-24 border-b-4 border-[#1C1917]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                Project showcase
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg font-medium text-[#1C1917]/80">
+                Tap a card to expand. Real member work spanning attraction-design
+                competitions, interactive experiences, and illusion R&amp;D.
+              </p>
+            </GsapReveal>
+            <div className="mt-10">
+              <PosterProjects />
+            </div>
+            <div className="mt-10">
+              <a
+                href={PORTFOLIO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border-4 border-[#1C1917] bg-[#1C1917] px-6 py-3 font-work-sans text-sm font-bold uppercase tracking-widest text-[#FFF4DF] transition hover:-translate-y-0.5 hover:bg-[#F05A47] hover:text-[#1C1917]"
+              >
+                View full portfolio
+                <Icon name="arrow-up-right" className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* DISCIPLINES CAROUSEL */}
+        <section id="disciplines" className="scroll-mt-24 border-b-4 border-[#1C1917] bg-[#F4C95D]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                Every discipline plays a part
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg font-medium text-[#1C1917]/80">
+                Spin through the disciplines that come together to build an
+                experience. Use the arrows or pick one directly.
+              </p>
+            </GsapReveal>
+            <div className="mt-10">
+              <DisciplineCarousel />
+            </div>
+          </div>
+        </section>
+
+        {/* WHY JOIN */}
+        <section className="border-b-4 border-[#1C1917] bg-[#38233D] text-[#FFF4DF]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                Why join?
+              </h2>
+            </GsapReveal>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {WHY_JOIN.map((b, i) => (
+                <GsapReveal key={b} delay={i * 0.04} as="li">
+                  <div className="flex items-start gap-3">
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-archivo-black text-sm text-[#1C1917]"
+                      style={{ backgroundColor: "#F4C95D" }}
+                      aria-hidden
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="text-lg font-semibold leading-snug">{b}</span>
+                  </div>
+                </GsapReveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* JOIN */}
+        <section id="join" className="scroll-mt-24 border-b-4 border-[#1C1917] bg-[#F05A47]">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div>
+                <h2 className="font-archivo-black text-5xl uppercase leading-[0.85] text-[#FFF4DF] sm:text-6xl">
+                  No experience?
+                  <br />
+                  <span className="text-[#1C1917]">Perfect.</span>
+                </h2>
+                <p className="mt-6 max-w-md text-lg font-semibold leading-relaxed text-[#FFF4DF]">
+                  All you need is curiosity. Whether you want a career in themed
+                  entertainment or just love a great experience, come build with
+                  us.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <MagneticButton
+                    href={JOIN_FORM_URL}
+                    className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1C1917] px-7 py-3.5 text-base font-bold text-[#FFF4DF] shadow-[4px_4px_0_0_#8C1515] transition hover:bg-[#38233D]"
+                    comingSoonMessage="Interest form coming soon"
+                    bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+                  >
+                    Interest form
+                  </MagneticButton>
+                  <PlaceholderLink
+                    href={MAILING_LIST_URL}
+                    className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-7 py-3.5 text-base font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
+                    comingSoonMessage="Mailing list coming soon"
+                    bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+                  >
+                    Mailing list
+                  </PlaceholderLink>
+                  <PlaceholderLink
+                    href={INSTAGRAM_URL}
+                    className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-7 py-3.5 text-base font-bold text-[#1C1917] transition hover:bg-[#69C5D8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
+                    comingSoonMessage="Instagram coming soon"
+                    bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+                  >
+                    <InstagramIcon className="h-5 w-5" />
+                    {INSTAGRAM_HANDLE}
+                  </PlaceholderLink>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border-4 border-[#1C1917] bg-[#FFF4DF] p-6 shadow-[6px_6px_0_0_#1C1917] sm:p-8">
+                <h3 className="font-archivo-black text-3xl uppercase leading-none">
+                  Count me in
+                </h3>
+                <p className="mt-2 text-sm font-semibold text-[#1C1917]/70">
+                  We&rsquo;ll follow up with next steps and events.
+                </p>
+                <div className="mt-5">
+                  <PosterJoinForm />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PROFESSIONALS & SPONSORS */}
+        <section id="contact" className="scroll-mt-24">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <GsapReveal>
+              <h2 className="font-archivo-black text-4xl uppercase leading-none sm:text-5xl">
+                Partners &amp; pros
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg font-medium text-[#1C1917]/80">
+                We&rsquo;d love to work with speakers, mentors, alumni, industry
+                partners, and sponsors who want to support the next generation of
+                experience makers.
+              </p>
+            </GsapReveal>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {[
+                "Guest speakers",
+                "Mentors",
+                "Alumni",
+                "Industry partners",
+                "Sponsors",
+                "University partners",
+              ].map((r, i) => {
+                const colors = ["#F05A47", "#F4C95D", "#69C5D8", "#38233D", "#8C1515"];
+                const bg = colors[i % colors.length];
+                const light = bg === "#F4C95D" || bg === "#69C5D8";
+                return (
+                  <span
+                    key={r}
+                    className="inline-block rounded-full border-2 border-[#1C1917] px-5 py-2.5 text-sm font-bold uppercase tracking-wide"
+                    style={{
+                      backgroundColor: bg,
+                      color: light ? "#1C1917" : "#FFF4DF",
+                    }}
+                  >
+                    {r}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <MagneticButton
+                href={SPONSOR_INQUIRY_URL}
+                className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#8C1515] px-7 py-3.5 text-base font-bold text-[#FFF4DF] shadow-[4px_4px_0_0_#1C1917] transition hover:bg-[#F05A47]"
+                comingSoonMessage="Sponsor inquiry coming soon"
+                bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+              >
+                Partner or sponsor
+              </MagneticButton>
+              <PlaceholderLink
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-7 py-3.5 text-base font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
+              >
+                <Mail className="h-5 w-5" aria-hidden />
+                Contact us
+              </PlaceholderLink>
+            </div>
+            <p className="mt-3 text-xs font-bold uppercase tracking-wide text-[#1C1917]/50">
+              Contact address is a placeholder until the club email is set.
+            </p>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-neutral-200 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-6 py-8 text-sm text-neutral-500">
-          <p>
-            {ORG.short} — student-run design review. Not an official Stanford
-            University page. © {year}
-          </p>
+      {/* FOOTER */}
+      <footer className="border-t-4 border-[#1C1917] bg-[#1C1917] text-[#FFF4DF]">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="grid gap-8 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <p className="font-archivo-black text-3xl uppercase">
+                TEA<span className="text-[#F05A47]">@</span>Stanford
+              </p>
+              <p className="mt-3 max-w-sm text-sm font-medium leading-relaxed text-[#FFF4DF]/70">
+                {ORG.mission}
+              </p>
+              <p className="mt-3 text-xs font-bold uppercase tracking-wide text-[#F4C95D]">
+                {ORG.nextgen}
+              </p>
+            </div>
+            <nav aria-label="Footer" className="md:col-span-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F4C95D]">
+                Explore
+              </p>
+              <ul className="mt-3 grid grid-cols-2 gap-y-2 text-sm font-semibold">
+                {[
+                  ["About", "#about"],
+                  ["Program", "#pillars"],
+                  ["Events", "#events"],
+                  ["Projects", "#projects"],
+                  ["Disciplines", "#disciplines"],
+                  ["Join", "#join"],
+                ].map(([label, href]) => (
+                  <li key={href}>
+                    <a href={href} className="transition hover:text-[#F05A47]">
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="md:col-span-3">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F4C95D]">
+                Connect
+              </p>
+              <ul className="mt-3 space-y-2 text-sm font-semibold">
+                <li>
+                  <PlaceholderLink
+                    href={INSTAGRAM_URL}
+                    className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
+                    comingSoonMessage="Instagram coming soon"
+                    bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
+                  >
+                    <InstagramIcon className="h-4 w-4" />
+                    {INSTAGRAM_HANDLE}
+                  </PlaceholderLink>
+                </li>
+                <li>
+                  <PlaceholderLink
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
+                  >
+                    <Mail className="h-4 w-4" aria-hidden />
+                    Email us
+                  </PlaceholderLink>
+                </li>
+                <li>
+                  <PlaceholderLink
+                    href={DONATE_URL}
+                    className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
+                    comingSoonMessage="Donate link coming soon"
+                    bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
+                  >
+                    Donate
+                  </PlaceholderLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-[#FFF4DF]/20 pt-6 text-xs font-medium leading-relaxed text-[#FFF4DF]/60">
+            <p>
+              © {year} {ORG.short}. A student-run organization — not officially
+              endorsed by Stanford University or any entertainment company.
+              Events shown are illustrative placeholders.
+            </p>
+          </div>
         </div>
       </footer>
+
     </div>
   );
 }

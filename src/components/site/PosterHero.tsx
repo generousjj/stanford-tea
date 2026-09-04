@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ArrowRight, Star } from "lucide-react";
-import { MagneticButton } from "@/components/concept-three/MagneticButton";
+import { MagneticButton } from "@/components/site/MagneticButton";
 import { ORG } from "@/data/org";
 import { JOIN_FORM_URL } from "@/lib/links";
 

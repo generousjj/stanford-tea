@@ -38,14 +38,3 @@ export type Pillar = {
   description: string;
   icon: string;
 };
-
-export type ConceptId = "concept-1" | "concept-2" | "concept-3";
-
-export type ConceptMeta = {
-  id: ConceptId;
-  index: number;
-  name: string;
-  tagline: string;
-  description: string;
-  href: string;
-};

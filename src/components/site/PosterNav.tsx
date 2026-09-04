@@ -5,7 +5,12 @@ import { Menu, X } from "lucide-react";
 import gsap from "gsap";
 import { PlaceholderLink } from "@/components/shared/PlaceholderLink";
 import { InstagramIcon } from "@/components/shared/BrandIcons";
-import { JOIN_FORM_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from "@/lib/links";
+import {
+  JOIN_FORM_URL,
+  DONATE_URL,
+  INSTAGRAM_URL,
+  INSTAGRAM_HANDLE,
+} from "@/lib/links";
 
 const LINKS = [
   { id: "about", label: "About" },
@@ -135,7 +140,15 @@ export function PosterNav() {
           </ul>
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2 lg:flex">
+          <PlaceholderLink
+            href={DONATE_URL}
+            className="inline-flex min-h-11 items-center rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-5 py-2.5 font-work-sans text-sm font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C1515]"
+            comingSoonMessage="Donate link coming soon"
+            bubbleClassName="bg-[#1C1917] text-[#FFF4DF]"
+          >
+            Donate
+          </PlaceholderLink>
           <PlaceholderLink
             href={JOIN_FORM_URL}
             className="inline-flex min-h-11 items-center rounded-full bg-[#8C1515] px-5 py-2.5 font-work-sans text-sm font-bold text-[#FFF4DF] transition hover:bg-[#F05A47] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
@@ -208,6 +221,14 @@ export function PosterNav() {
                 bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
               >
                 Join TEA @ Stanford
+              </PlaceholderLink>
+              <PlaceholderLink
+                href={DONATE_URL}
+                className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
+                comingSoonMessage="Donate link coming soon"
+                bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
+              >
+                Donate
               </PlaceholderLink>
               <PlaceholderLink
                 href={INSTAGRAM_URL}

@@ -1,4 +1,4 @@
-import type { ConceptMeta, Pillar } from "@/lib/types";
+import type { Pillar } from "@/lib/types";
 
 export const ORG = {
   short: "TEA @ Stanford",
@@ -80,34 +80,4 @@ export const MAJORS: string[] = [
   "Human-Centered Design",
   "Operations",
   "Safety",
-];
-
-export const CONCEPTS: ConceptMeta[] = [
-  {
-    id: "concept-1",
-    index: 1,
-    name: "Stanford Creative Lab",
-    tagline: "Editorial · Interdisciplinary · Credible",
-    description:
-      "A refined, editorial homepage that reads like a leading university design lab or a modern architecture publication. Generous whitespace, asymmetric grids, numbered sections, and restrained motion.",
-    href: "/concept-1",
-  },
-  {
-    id: "concept-2",
-    index: 2,
-    name: "Immersive Experience Blueprint",
-    tagline: "Technical · Spatial · Cinematic",
-    description:
-      "A process-driven homepage styled like attraction concept documents and show-system diagrams. Grid backgrounds, technical linework, annotations, coordinates, and animated drawing lines.",
-    href: "/concept-2",
-  },
-  {
-    id: "concept-3",
-    index: 3,
-    name: "Contemporary Attraction Poster",
-    tagline: "Energetic · Graphic · Community-driven",
-    description:
-      "A bold, expressive homepage inspired by contemporary event posters and attraction key art. Oversized type, layered compositions, sticker-like labels, and playful, controlled motion.",
-    href: "/concept-3",
-  },
 ];

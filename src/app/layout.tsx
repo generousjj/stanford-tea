@@ -4,11 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "TEA @ Stanford — Website Concepts",
+    default: "TEA @ Stanford",
     template: "%s · TEA @ Stanford",
   },
   description:
-    "Three website concepts for TEA @ Stanford, the Stanford Themed Entertainment Association — exploring how memorable experiences are imagined, engineered, produced, and operated.",
+    "Stanford Themed Entertainment Association — exploring how immersive, memorable experiences are imagined, engineered, produced, and operated.",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={fontVariables}>
-      <body className="font-inter antialiased">{children}</body>
+      <body className="font-work-sans antialiased">{children}</body>
     </html>
   );
 }

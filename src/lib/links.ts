@@ -9,6 +9,7 @@ export const JOIN_FORM_URL: string = PLACEHOLDER;
 export const MAILING_LIST_URL: string = PLACEHOLDER;
 export const EVENTS_REGISTRATION_URL: string = PLACEHOLDER;
 export const SPONSOR_INQUIRY_URL: string = PLACEHOLDER;
+export const DONATE_URL: string = PLACEHOLDER;
 export const LINKEDIN_URL: string = PLACEHOLDER;
 export const CONTACT_EMAIL: string = "hello@example.com"; // placeholder address
 

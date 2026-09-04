@@ -2,9 +2,9 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 // When building for GitHub Pages we static-export and serve the site from
-// the /tea-sites project subpath. Local dev keeps clean root-relative URLs.
+// the /stanford-tea project subpath. Local dev keeps clean root-relative URLs.
 const isPages = process.env.GITHUB_PAGES === "true";
-const repo = "tea-sites";
+const repo = "stanford-tea";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   // Baked into the client bundle so plain <img> src values can be prefixed
-  // with the correct base path (empty in dev, /tea-sites on GitHub Pages).
+  // with the correct base path (empty in dev, /stanford-tea on GitHub Pages).
   env: {
     NEXT_PUBLIC_BASE_PATH: isPages ? `/${repo}` : "",
   },
