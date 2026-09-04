@@ -25,7 +25,7 @@ export function SupportModal({ open, onClose }: SupportModalProps) {
       onClose={onClose}
       labelledById={titleId}
       describedById={descId}
-      className="flex max-h-[min(94dvh,40rem)] max-w-lg flex-col overflow-hidden rounded-t-3xl border-4 border-[#1C1917] bg-[#FFF4DF] shadow-[8px_8px_0_0_#1C1917] sm:max-h-[min(94dvh,48rem)] sm:rounded-3xl"
+      className="flex max-h-[min(94dvh,40rem)] max-w-lg flex-col overflow-hidden rounded-t-3xl border-4 border-[#1C1917] bg-[#FFF4DF] shadow-[8px_8px_0_0_#1C1917] sm:max-h-[min(94dvh,52rem)] sm:rounded-3xl"
     >
       <div className="relative shrink-0 px-5 pb-3 pt-4 sm:px-6 sm:pt-5">
         <button
