@@ -177,7 +177,7 @@ function ProjectRowBlock({
 }
 
 export function PosterProjects() {
-  const [openRow, setOpenRow] = useState<string | null>(projectRows[0]?.id ?? null);
+  const [openRow, setOpenRow] = useState<string | null>(null);
   const reduce = useReducedMotion();
 
   return (
