@@ -11,7 +11,7 @@ export const ORG = {
   allMajors:
     "All majors and experience levels are welcome — from engineers and designers to writers, performers, and the simply theme-park-curious.",
   nextgen:
-    "Connected to the Themed Entertainment Association's NextGen community.",
+    "Officially recognized student organization of TEA NextGen.",
 } as const;
 
 /** What "themed entertainment" can include — for the explainer section. */

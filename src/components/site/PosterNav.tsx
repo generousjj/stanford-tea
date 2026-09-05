@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { PlaceholderLink } from "@/components/shared/PlaceholderLink";
 import { InstagramIcon } from "@/components/shared/BrandIcons";
 import { DonateButton } from "@/components/site/DonateButton";
+import { OfficialTeaBadge } from "@/components/site/OfficialTeaBadge";
 import { SupportModal } from "@/components/site/SupportModal";
 import {
   JOIN_FORM_URL,
@@ -125,13 +126,15 @@ export function PosterNav() {
 
   return (
     <div className="sticky top-0 z-40 px-3 pt-3">
-      <header className="mx-auto flex max-w-6xl items-center justify-between rounded-full border-4 border-[#1C1917] bg-[#FFF4DF] px-4 py-2 shadow-[4px_4px_0_0_#1C1917]">
-        <a
-          href="#top"
-          className="font-archivo-black text-lg uppercase tracking-tight text-[#1C1917] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8C1515]"
-        >
-          TEA<span className="text-[#F05A47]">@</span>Stanford
-        </a>
+      <header className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border-4 border-[#1C1917] bg-[#FFF4DF] px-4 py-2 shadow-[4px_4px_0_0_#1C1917]">
+        <div className="flex min-w-0 items-center gap-3">
+          <a
+            href="#top"
+            className="shrink-0 font-archivo-black text-lg uppercase tracking-tight text-[#1C1917] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8C1515]"
+          >
+            TEA<span className="text-[#F05A47]">@</span>Stanford
+          </a>
+        </div>
 
         <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -247,6 +250,12 @@ export function PosterNav() {
                 <InstagramIcon className="h-5 w-5" />
                 {INSTAGRAM_HANDLE}
               </PlaceholderLink>
+              <OfficialTeaBadge
+                variant="dark"
+                size="sm"
+                showCaption
+                className="mt-4 text-[#FFF4DF]"
+              />
             </div>
           </nav>
         </div>

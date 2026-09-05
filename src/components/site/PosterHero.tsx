@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ArrowRight, Star } from "lucide-react";
 import { MagneticButton } from "@/components/site/MagneticButton";
+import { OfficialTeaBadge } from "@/components/site/OfficialTeaBadge";
 import { ORG } from "@/data/org";
 import { JOIN_FORM_URL } from "@/lib/links";
 
@@ -97,12 +98,15 @@ export function PosterHero() {
       />
 
       <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-12 sm:pt-16">
-        <span
+        <div
           data-hero-item
-          className="c3-hero-hidden inline-block -rotate-2 bg-[#8C1515] px-4 py-1.5 font-work-sans text-sm font-bold uppercase tracking-wide text-[#FFF4DF] shadow-[3px_3px_0_0_#1C1917]"
+          className="c3-hero-hidden flex flex-col items-start gap-4"
         >
-          {ORG.formal}
-        </span>
+          <OfficialTeaBadge variant="light" size="lg" priority />
+          <span className="inline-block w-fit -rotate-2 bg-[#8C1515] px-4 py-1.5 font-work-sans text-sm font-bold uppercase tracking-wide text-[#FFF4DF] shadow-[3px_3px_0_0_#1C1917]">
+            {ORG.formal}
+          </span>
+        </div>
 
         <h1 className="font-archivo-black mt-6 text-[clamp(2.75rem,11vw,8rem)] uppercase leading-[0.82] tracking-tight text-[#1C1917]">
           <span data-hero-item className="c3-hero-hidden block">

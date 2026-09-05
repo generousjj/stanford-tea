@@ -30,6 +30,7 @@ import {
   CONTACT_EMAIL,
 } from "@/lib/links";
 import { DonateButton } from "@/components/site/DonateButton";
+import { OfficialTeaBadge } from "@/components/site/OfficialTeaBadge";
 import type { EventCategory } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -107,6 +108,16 @@ export default function HomePage() {
                 );
               })}
             </div>
+            <GsapReveal delay={0.12}>
+              <div className="mt-12 border-t-4 border-[#FFF4DF]/25 pt-8">
+                <OfficialTeaBadge
+                  variant="dark"
+                  size="md"
+                  showCaption
+                  className="text-[#FFF4DF]"
+                />
+              </div>
+            </GsapReveal>
           </div>
         </section>
 
@@ -332,6 +343,11 @@ export default function HomePage() {
                   entertainment or just love a great experience, come build with
                   us.
                 </p>
+                <OfficialTeaBadge
+                  variant="dark"
+                  size="sm"
+                  className="mt-6"
+                />
                 <div className="mt-8 flex flex-wrap gap-3">
                   <MagneticButton
                     href={JOIN_FORM_URL}
@@ -429,9 +445,13 @@ export default function HomePage() {
               <p className="mt-3 max-w-sm text-sm font-medium leading-relaxed text-[#FFF4DF]/70">
                 {ORG.mission}
               </p>
-              <p className="mt-3 text-xs font-bold uppercase tracking-wide text-[#F4C95D]">
-                {ORG.nextgen}
-              </p>
+              <OfficialTeaBadge
+                variant="dark"
+                size="md"
+                showCaption
+                className="mt-6 text-[#FFF4DF]"
+                captionClassName="max-w-[16rem] font-work-sans text-[11px] font-bold uppercase leading-snug tracking-widest text-[#F4C95D]"
+              />
             </div>
             <nav aria-label="Footer" className="md:col-span-4">
               <p className="text-xs font-bold uppercase tracking-widest text-[#F4C95D]">
