@@ -320,7 +320,7 @@ export default function HomePage() {
         {/* JOIN */}
         <section id="join" className="scroll-mt-24 border-b-4 border-[#1C1917] bg-[#F05A47]">
           <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="font-archivo-black text-5xl uppercase leading-[0.85] text-[#FFF4DF] sm:text-6xl">
                   No experience?
@@ -332,15 +332,7 @@ export default function HomePage() {
                   entertainment or just love a great experience, come build with
                   us.
                 </p>
-              </div>
-              <div className="lg:text-right">
-                <p className="font-work-sans text-sm font-bold uppercase tracking-widest text-[#1C1917]/80">
-                  STEA Interest Form 2026–27
-                </p>
-                <p className="mt-2 text-base font-semibold text-[#FFF4DF]">
-                  Takes about a minute. Stanford sign-in required.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3 lg:justify-end">
+                <div className="mt-8 flex flex-wrap gap-3">
                   <MagneticButton
                     href={JOIN_FORM_URL}
                     className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1C1917] px-7 py-3.5 text-base font-bold text-[#FFF4DF] shadow-[4px_4px_0_0_#8C1515] transition hover:bg-[#38233D]"
@@ -358,9 +350,6 @@ export default function HomePage() {
                   </PlaceholderLink>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-10 rounded-3xl border-4 border-[#1C1917] bg-[#FFF4DF] p-3 shadow-[6px_6px_0_0_#1C1917] sm:p-4">
               <PosterJoinForm />
             </div>
           </div>

@@ -7,10 +7,6 @@ export const PLACEHOLDER = "#" as const;
 
 export const JOIN_FORM_URL: string = "https://forms.gle/qwQWKuNiDN2B8gEdA";
 
-/** Embedded Google Form (interest signup). Prefer this src for iframes. */
-export const JOIN_FORM_EMBED_SRC: string =
-  "https://docs.google.com/forms/d/e/1FAIpQLSf4-4wwFGsfYR7xgI4DKQNmZnPjpTnSL5mdhcACGp_W-1wF-A/viewform?embedded=true";
-
 export const MAILING_LIST_URL: string = PLACEHOLDER;
 export const EVENTS_REGISTRATION_URL: string = PLACEHOLDER;
 export const SPONSOR_INQUIRY_URL: string = PLACEHOLDER;
