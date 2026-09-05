@@ -190,7 +190,7 @@ export function PosterNav() {
           aria-label="Site menu"
           className="fixed inset-0 z-[85] flex flex-col bg-[#38233D] text-[#FFF4DF] lg:hidden"
         >
-          <div className="flex items-center justify-between px-6 py-5">
+          <div className="flex items-center justify-between px-6 py-5 pt-[max(1.25rem,env(safe-area-inset-top))]">
             <span className="font-archivo-black text-lg uppercase tracking-tight">
               TEA<span className="text-[#F05A47]">@</span>Stanford
             </span>
@@ -206,56 +206,59 @@ export function PosterNav() {
 
           <nav
             aria-label="Mobile"
-            className="flex flex-1 flex-col justify-center overflow-y-auto px-6 pb-8"
+            className="flex flex-1 flex-col overflow-y-auto overscroll-contain px-6 pb-[max(2rem,env(safe-area-inset-bottom))]"
           >
-            <ul>
-              {LINKS.map((l) => (
-                <li key={l.id} className="overflow-hidden">
-                  <a
-                    href={`#${l.id}`}
-                    onClick={closeMenu}
-                    className="c3-menu-link flex min-h-[3.25rem] items-center font-archivo-black text-4xl uppercase leading-tight tracking-tight text-[#FFF4DF] transition-colors hover:text-[#F4C95D] focus-visible:text-[#F4C95D] focus-visible:outline-none sm:text-5xl"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {/* my-auto centers when short; when content overflows, margins collapse so About stays reachable */}
+            <div className="my-auto w-full py-4">
+              <ul>
+                {LINKS.map((l) => (
+                  <li key={l.id} className="overflow-hidden">
+                    <a
+                      href={`#${l.id}`}
+                      onClick={closeMenu}
+                      className="c3-menu-link flex min-h-[3.25rem] items-center font-archivo-black text-4xl uppercase leading-tight tracking-tight text-[#FFF4DF] transition-colors hover:text-[#F4C95D] focus-visible:text-[#F4C95D] focus-visible:outline-none sm:text-5xl"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="c3-menu-link mt-8 flex flex-col gap-3">
-              <PlaceholderLink
-                href={JOIN_FORM_URL}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#F05A47] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
-                comingSoonMessage="Interest form coming soon"
-                bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
-              >
-                Join TEA @ Stanford
-              </PlaceholderLink>
-              <DonateButton
-                onBeforeOpen={() => {
-                  skipMenuFocusRestore.current = true;
-                  setOpen(false);
-                }}
-                onOpen={openSupport}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
-              >
-                Donate
-              </DonateButton>
-              <PlaceholderLink
-                href={INSTAGRAM_URL}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
-                comingSoonMessage="Instagram coming soon"
-                bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
-              >
-                <InstagramIcon className="h-5 w-5" />
-                {INSTAGRAM_HANDLE}
-              </PlaceholderLink>
-              <OfficialTeaBadge
-                variant="dark"
-                size="sm"
-                showCaption
-                className="mt-4 text-[#FFF4DF]"
-              />
+              <div className="c3-menu-link mt-8 flex flex-col gap-3">
+                <PlaceholderLink
+                  href={JOIN_FORM_URL}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#F05A47] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
+                  comingSoonMessage="Interest form coming soon"
+                  bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
+                >
+                  Join TEA @ Stanford
+                </PlaceholderLink>
+                <DonateButton
+                  onBeforeOpen={() => {
+                    skipMenuFocusRestore.current = true;
+                    setOpen(false);
+                  }}
+                  onOpen={openSupport}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
+                >
+                  Donate
+                </DonateButton>
+                <PlaceholderLink
+                  href={INSTAGRAM_URL}
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-[#FFF4DF] px-6 py-3.5 font-work-sans text-base font-bold text-[#FFF4DF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4C95D]"
+                  comingSoonMessage="Instagram coming soon"
+                  bubbleClassName="bg-[#FFF4DF] text-[#1C1917]"
+                >
+                  <InstagramIcon className="h-5 w-5" />
+                  {INSTAGRAM_HANDLE}
+                </PlaceholderLink>
+                <OfficialTeaBadge
+                  variant="dark"
+                  size="sm"
+                  showCaption
+                  className="mt-4 text-[#FFF4DF]"
+                />
+              </div>
             </div>
           </nav>
         </div>

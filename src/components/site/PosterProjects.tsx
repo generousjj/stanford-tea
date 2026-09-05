@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { flushSync } from "react-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { projectRows, type ProjectRow } from "@/data/projects";
 import type { Project } from "@/lib/types";
 import { asset } from "@/lib/asset";
 
 const ACCENTS = ["#F05A47", "#F4C95D", "#69C5D8", "#8C1515", "#38233D", "#F05A47"];
+const ROW_ANIM_MS = 400;
 
 function ProjectDetail({
   project,
@@ -93,6 +95,21 @@ function ProjectDetail({
   );
 }
 
+function pinButtonInViewport(button: HTMLElement, top: number) {
+  const root = document.documentElement;
+  const prevBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  const delta = button.getBoundingClientRect().top - top;
+  if (Math.abs(delta) > 0.5) {
+    const next = window.scrollY + delta;
+    root.scrollTop = next;
+    if (Math.abs(window.scrollY - next) > 1) {
+      document.body.scrollTop = next;
+    }
+  }
+  root.style.scrollBehavior = prevBehavior;
+}
+
 function ProjectRowBlock({
   row,
   rowIndex,
@@ -104,7 +121,7 @@ function ProjectRowBlock({
   row: ProjectRow;
   rowIndex: number;
   open: boolean;
-  onToggle: () => void;
+  onToggle: (button: HTMLButtonElement) => void;
   reduce: boolean | null;
   startingNumber: number;
 }) {
@@ -117,7 +134,7 @@ function ProjectRowBlock({
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        onClick={onToggle}
+        onClick={(e) => onToggle(e.currentTarget)}
         className="flex w-full items-center gap-4 p-5 text-left transition hover:bg-[#F4C95D]/35 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#8C1515]"
       >
         <span
@@ -146,32 +163,37 @@ function ProjectRowBlock({
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            key="row-content"
-            initial={reduce ? undefined : { height: 0, opacity: 0 }}
-            animate={reduce ? undefined : { height: "auto", opacity: 1 }}
-            exit={reduce ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="border-t-4 border-[#1C1917] bg-[#38233D]/5 p-4 sm:p-5">
-              <div className="grid items-start gap-4 md:grid-cols-2">
-                {row.projects.map((p, i) => (
-                  <ProjectDetail
-                    key={p.title}
-                    project={p}
-                    accent={ACCENTS[(startingNumber + i - 1) % ACCENTS.length]}
-                    indexLabel={String(startingNumber + i).padStart(2, "0")}
-                  />
-                ))}
-              </div>
+      {/*
+        No AnimatePresence exit: closing unmounts instantly so layout + scroll
+        pin happen in the same click (before paint). Open still animates down
+        from the header, which does not move the +/- control.
+      */}
+      {open && (
+        <motion.div
+          id={panelId}
+          initial={reduce ? false : { height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          transition={
+            reduce
+              ? { duration: 0 }
+              : { duration: ROW_ANIM_MS / 1000, ease: [0.22, 1, 0.36, 1] }
+          }
+          className="overflow-hidden"
+        >
+          <div className="border-t-4 border-[#1C1917] bg-[#38233D]/5 p-4 sm:p-5">
+            <div className="grid items-start gap-4 md:grid-cols-2">
+              {row.projects.map((p, i) => (
+                <ProjectDetail
+                  key={p.title}
+                  project={p}
+                  accent={ACCENTS[(startingNumber + i - 1) % ACCENTS.length]}
+                  indexLabel={String(startingNumber + i).padStart(2, "0")}
+                />
+              ))}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
@@ -193,9 +215,13 @@ export function PosterProjects() {
             row={row}
             rowIndex={rowIndex}
             open={openRow === row.id}
-            onToggle={() =>
-              setOpenRow((current) => (current === row.id ? null : row.id))
-            }
+            onToggle={(button) => {
+              const top = button.getBoundingClientRect().top;
+              flushSync(() => {
+                setOpenRow((current) => (current === row.id ? null : row.id));
+              });
+              pinButtonInViewport(button, top);
+            }}
             reduce={reduce}
             startingNumber={startingNumber}
           />
