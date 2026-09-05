@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight, CalendarDays, MapPin, Clock, Mail } from "lucide-react";
-import { InstagramIcon } from "@/components/shared/BrandIcons";
+import { InstagramIcon, LinkedInIcon } from "@/components/shared/BrandIcons";
 import { SkipLink } from "@/components/shared/SkipLink";
 import { PlaceholderLink } from "@/components/shared/PlaceholderLink";
 import { PosterNav } from "@/components/site/PosterNav";
@@ -26,8 +26,9 @@ import {
   EVENTS_REGISTRATION_URL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
+  LINKEDIN_URL,
   PORTFOLIO_URL,
-  CONTACT_EMAIL,
+  TEA_TEAM_MAILTO,
 } from "@/lib/links";
 import { DonateButton } from "@/components/site/DonateButton";
 import { OfficialTeaBadge } from "@/components/site/OfficialTeaBadge";
@@ -420,16 +421,13 @@ export default function HomePage() {
                 Partner or sponsor
               </MagneticButton>
               <PlaceholderLink
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={TEA_TEAM_MAILTO}
                 className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-[#1C1917] bg-[#FFF4DF] px-7 py-3.5 text-base font-bold text-[#1C1917] transition hover:bg-[#F4C95D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
               >
                 <Mail className="h-5 w-5" aria-hidden />
                 Contact us
               </PlaceholderLink>
             </div>
-            <p className="mt-3 text-xs font-bold uppercase tracking-wide text-[#1C1917]/50">
-              Contact address is a placeholder until the club email is set.
-            </p>
           </div>
         </section>
       </main>
@@ -491,13 +489,24 @@ export default function HomePage() {
                   </PlaceholderLink>
                 </li>
                 <li>
-                  <PlaceholderLink
-                    href={`mailto:${CONTACT_EMAIL}`}
+                  <a
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
+                  >
+                    <LinkedInIcon className="h-4 w-4" />
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={TEA_TEAM_MAILTO}
                     className="inline-flex items-center gap-2 transition hover:text-[#F05A47]"
                   >
                     <Mail className="h-4 w-4" aria-hidden />
                     Email us
-                  </PlaceholderLink>
+                  </a>
                 </li>
                 <li>
                   <DonateButton className="inline-flex items-center gap-2 transition hover:text-[#F05A47]">

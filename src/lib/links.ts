@@ -10,8 +10,8 @@ export const JOIN_FORM_URL: string = "https://forms.gle/qwQWKuNiDN2B8gEdA";
 export const MAILING_LIST_URL: string = PLACEHOLDER;
 export const EVENTS_REGISTRATION_URL: string = PLACEHOLDER;
 export const SPONSOR_INQUIRY_URL: string = PLACEHOLDER;
-export const LINKEDIN_URL: string = PLACEHOLDER;
-export const CONTACT_EMAIL: string = "hello@example.com"; // placeholder address
+export const LINKEDIN_URL: string =
+  "https://www.linkedin.com/company/tea-stanford/";
 
 /** Stanford University giving portal for TEA gifts. */
 export const STANFORD_GIVING_URL = "https://give.stanford.edu/" as const;
