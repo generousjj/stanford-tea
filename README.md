@@ -29,8 +29,9 @@ npm run lint
 | Project images | `public/projects/` |
 
 The **Donate** button opens a support modal (Stanford giving + contact the TEA
-team). Other links still set to `#` in `src/lib/links.ts` show a “coming soon”
-bubble — replace placeholders like `JOIN_FORM_URL` and `CONTACT_EMAIL` when ready.
+team). The **Join** section embeds the live Google Interest Form
+(`JOIN_FORM_URL` / `JOIN_FORM_EMBED_SRC`). Other links still set to `#` show a
+“coming soon” bubble — replace placeholders like `CONTACT_EMAIL` when ready.
 
 ## Deploy
 

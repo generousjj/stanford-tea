@@ -1,50 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { JOIN_FORM_EMBED_SRC, JOIN_FORM_URL } from "@/lib/links";
 
+/**
+ * Embedded STEA Interest Form (Google Forms, Stanford-restricted).
+ * Includes a direct-link fallback under the iframe.
+ */
 export function PosterJoinForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const field =
-    "min-h-12 w-full rounded-2xl border-2 border-[#1C1917] bg-[#FFF4DF] px-4 py-2.5 font-work-sans text-[#1C1917] outline-none placeholder:text-[#1C1917]/40 focus:border-[#8C1515] focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#8C1515]";
-  const label =
-    "mb-1.5 block font-work-sans text-sm font-bold uppercase tracking-wide text-[#1C1917]";
-
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-      className="space-y-4"
-      aria-describedby="poster-form-note"
-    >
-      <p id="poster-form-note" className="font-work-sans text-xs font-semibold text-[#1C1917]/60">
-        Preview form — nothing is collected or sent.
-      </p>
-      <div>
-        <label htmlFor="poster-name" className={label}>
-          Name
-        </label>
-        <input id="poster-name" name="name" type="text" autoComplete="name" className={field} />
+    <div className="overflow-hidden rounded-2xl border-2 border-[#1C1917] bg-[#FFF4DF]">
+      <div className="relative w-full overflow-hidden" style={{ height: 2275 }}>
+        <iframe
+          src={JOIN_FORM_EMBED_SRC}
+          title="STEA Interest Form 2026–27"
+          className="absolute inset-0 h-full w-full border-0 bg-[#FFF4DF]"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        >
+          Loading…
+        </iframe>
       </div>
-      <div>
-        <label htmlFor="poster-email" className={label}>
-          Stanford email
-        </label>
-        <input id="poster-email" name="email" type="email" autoComplete="email" className={field} />
-      </div>
-      <button
-        type="submit"
-        className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[#8C1515] px-6 py-3 font-work-sans text-base font-bold text-[#FFF4DF] transition hover:bg-[#F05A47] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1917]"
-      >
-        Count me in (preview)
-      </button>
-      <p role="status" aria-live="polite" className="min-h-5 font-work-sans text-sm font-bold text-[#8C1515]">
-        {submitted
-          ? "You're on the list — for real, connect the interest form to save responses."
-          : ""}
+      <p className="border-t-2 border-[#1C1917] px-4 py-3 text-center font-work-sans text-xs font-semibold text-[#1C1917]/70">
+        Sign in with your Stanford Google account to submit.{" "}
+        <a
+          href={JOIN_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-bold text-[#8C1515] underline-offset-2 hover:underline"
+        >
+          Open form in a new tab
+        </a>
       </p>
-    </form>
+    </div>
   );
 }
