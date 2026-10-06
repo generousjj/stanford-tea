@@ -16,17 +16,8 @@ export const LINKEDIN_URL: string =
 /** Stanford University giving portal for TEA gifts. */
 export const STANFORD_GIVING_URL = "https://give.stanford.edu/" as const;
 
-/** TEA student leadership — for support / involvement inquiries. */
-export const TEA_TEAM_EMAILS = [
-  "lyled@stanford.edu",
-  "judestj@stanford.edu",
-  "faberry@stanford.edu",
-  "elleson@stanford.edu",
-  "wboyler@stanford.edu",
-  "thumay@stanford.edu",
-  "jayuk@stanford.edu",
-  "mamayag@stanford.edu",
-] as const;
+/** TEA student leadership contact email. */
+export const TEA_TEAM_EMAIL = "team@stanfordtea.com" as const;
 
 const TEA_TEAM_MAIL_SUBJECT = "Interest in Supporting TEA at Stanford";
 const TEA_TEAM_MAIL_BODY = `Hello TEA at Stanford team,
@@ -38,7 +29,7 @@ I'm reaching out because I'm interested in supporting or getting involved with T
 Best,`;
 
 /** Prefills subject + body for Contact the TEA Team. */
-export const TEA_TEAM_MAILTO = `mailto:${TEA_TEAM_EMAILS.join(",")}?subject=${encodeURIComponent(TEA_TEAM_MAIL_SUBJECT)}&body=${encodeURIComponent(TEA_TEAM_MAIL_BODY)}`;
+export const TEA_TEAM_MAILTO = `mailto:${TEA_TEAM_EMAIL}?subject=${encodeURIComponent(TEA_TEAM_MAIL_SUBJECT)}&body=${encodeURIComponent(TEA_TEAM_MAIL_BODY)}`;
 
 /** Real, live club Instagram. */
 export const INSTAGRAM_HANDLE = "@tea.stanford" as const;
